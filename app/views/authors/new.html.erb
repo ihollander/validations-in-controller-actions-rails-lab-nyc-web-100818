@@ -1,12 +1,26 @@
 <h2>Create an Author</h2>
-<%= form_tag authors_path, method: "post" do %>
+<%= form_for @author do |f| %>
   <div class="field">
-    <%= label_tag "name", "Name" %>
-    <%= text_field_tag "name" %>
+    <%= f.label "name", "Name" %>
+    <%= f.text_field "name" %>
   </div>
   <div class="field">
-    <%= label_tag "email", "Email" %>
-    <%= text_field_tag "email" %>
+    <%= f.label "email", "Email" %>
+    <%= f.text_field "email" %>
   </div>
-  <%= submit_tag "Create Author" %>
+  <%= f.submit "Create Author" %>
+<% end %>
+<% if @author.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(@author.errors.count, "error") %>
+    prohibited this author from being saved:
+  </h2>
+
+  <ul>
+  <% @author.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
 <% end %>
